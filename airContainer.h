@@ -1,7 +1,30 @@
+/**
+* \file airContainer.h
+* \author Jakub Korzeniowski, Łukasz Bobola
+* \date 07.12.2010
+* \version 1.0
+* \brief Zawiera definicje klasy abstrakcyjnej airContainer, bedaca baza dla roznych typow klas pojemnikowych
+*/
+
+// -----------------------------------------------------------------
+
+#ifndef AIRCONTAINERH
+#define AIRCONTAINERH
+
+// -----------------------------------------------------------------
+
 #include<iostream>
 
 using namespace std;
 
+// -----------------------------------------------------------------
+
+/**
+* \class airContainer
+* \author Jakub Korzeniowski, Łukasz Bobola
+* \date 07.12.2010
+* \brief klasa abstrakcyjna bedaca baza dla roznych typow klas pojemnikowych
+*/
 template <typename T>
 class airContainer
 {
@@ -28,7 +51,7 @@ class airContainer
 	airContainer<T> & operator<<(T const & element);
 
 	protected:
-	int checkEach(T const & element, bool invert, int from = 0);
+	int checkEach(T const & element, bool invert, int from = 0) const;
 	bool compare(airContainer<T> const & right);
 	airContainer<T> & appendContainer(airContainer<T> const & right);
 };
@@ -71,7 +94,7 @@ template <typename T> void airContainer<T>::clear(void)
 {
 	int size = this->size();
 
-	for(int i = 0; i < size; i++)
+	for(int i = size - 1; i >= 0; i--)
 		this->remove(i);
 }
 
@@ -81,8 +104,8 @@ template <typename T> void airContainer<T>::clear(void)
 template <typename T> bool airContainer<T>::isEmpty(void)
 {
 	if(this->checkEach(NULL, true) >= 0)
-		return true;
-	return false;
+		return false;
+	return true;
 }
 
 /// \indexOf - wyszukuje i zwraca indeks pierwszego elementu o wartosci _value zaczynajac od elementu _from
@@ -119,7 +142,13 @@ template <typename T> bool airContainer<T>::contains(T const & _value, int _from
 /// \return referencja do pojemnika, do ktorego przypisalismy
 template <typename T> airContainer<T> & airContainer<T>::operator=(airContainer<T> const & right)
 {
+	this->clear();
+	
+	int size = right.size();
+	for(int i = 0; i < size; i++)
+		this->insert(i, right.at(i));
 
+	return *(this);				
 }
 
 /// \ == sprawdza, czy dwa pojemniki sa sobie rowne
@@ -165,7 +194,7 @@ template <typename T> airContainer<T> & airContainer<T>::operator+=(airContainer
 template <typename T> airContainer<T> & airContainer<T>::operator+=(T const & element)
 {
 	this->append(element);
-	return this;
+	return *(this);
 }
 
 /// \ += dodaje wszystkie elementy z pojemnika right 
@@ -184,7 +213,7 @@ template <typename T> airContainer<T> & airContainer<T>::operator<<(airContainer
 template <typename T> airContainer<T> & airContainer<T>::operator<<(T const & element)
 {	
 	this->append(element);
-	return this;
+	return *(this);
 }
 
 
@@ -219,7 +248,7 @@ ostream & operator<<(ostream & output, airContainer<T> const & right)
 /// \param invert - jezeli true, to odwraca warunek ("==" -> "!=")
 /// \param from - element, od ktorego zaczynamy iteracje 
 /// \return index elementu, jezeli natrafi na element w pojemniku, -1, jezeli nie natrafi
-template <typename T> int airContainer<T>::checkEach(T const & element, bool invert, int from)
+template <typename T> int airContainer<T>::checkEach(T const & element, bool invert, int from) const
 {
 	int size = this->size();
 
@@ -263,3 +292,5 @@ template <typename T> airContainer<T> & airContainer<T>::appendContainer(airCont
 	
 	return this;
 }
+
+#endif

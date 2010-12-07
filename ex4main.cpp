@@ -34,7 +34,7 @@ int main(void)
   int ttab2[] = {2, 3, 2};
   for(int i=0;i<3;i++)
     t2 = t2 && (ttab2[i] == c2->at(i));
-    showTestResult(2, t2);
+  showTestResult(2, t2);
 
   // 3rd test - usuwanie z pojemnika
   c1->clear();
