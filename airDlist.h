@@ -113,7 +113,7 @@ bool airDlist<T>::insert(int index, T const & element)
 	bool returnValue = this->splice(index, true);
 	if(index >= 0 && index < length)
 	{
-		//this->at(index) = element;
+		this->at(index) = element;
 	}
 	return returnValue;
 }
@@ -178,7 +178,7 @@ bool airDlist<T>::splice(int index, bool add)
 
 	length += newElementsCount;
 
-	item * previousItem = index > 0 ? this->itemAt(index - 1) : NULL;
+	/*item * previousItem = index > 0 ? this->itemAt(index - 1) : NULL;
 
 
 	if(add)
@@ -200,7 +200,7 @@ bool airDlist<T>::splice(int index, bool add)
 			(startPointer = deletedItem->nextItem) && (startPointer->previousItem = NULL);
 		delete deletedItem;
 	}
-
+	*/
 	return true;
 }
 

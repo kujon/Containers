@@ -103,9 +103,9 @@ template <typename T> void airContainer<T>::clear(void)
 /// \return zwraca true jezeli pojemnik jest pusty, inaczej false   
 template <typename T> bool airContainer<T>::isEmpty(void)
 {
-	if(this->checkEach(NULL, true) >= 0)
-		return false;
-	return true;
+	if(this->size() == 0) 
+		return true;
+	return false;
 }
 
 /// \indexOf - wyszukuje i zwraca indeks pierwszego elementu o wartosci _value zaczynajac od elementu _from

@@ -16,8 +16,8 @@ int main(void)
   airContainer<int>* c1 = new airDlist<int>;
   airContainer<int>* c2;
   a << *((airDlist<int>*)c1);
-/*
-  // 1st test - dodawanie do pojemnika stalych, zmiennych, tymczasowych
+
+/*  // 1st test - dodawanie do pojemnika stalych, zmiennych, tymczasowych
   c1->append(3);
   c1->insert(0, 1+1);
   c1->insert(c1->size(), c1->size());
