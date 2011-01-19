@@ -177,6 +177,8 @@ int airCalc::doMath(airVector<command> * array)
 				this->push(fact(x));
 		}
 	}
+
+	return this->at(0);
 }
 
 /*
